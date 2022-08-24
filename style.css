@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap");
+
+/*** CUSTOM PROPERTIES ***/
+:root {
+  --bg: #5a01a7;
+  --startBtnColor: #fff;
+  --bgContainerCard: #fff;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Krub", sans-serif;
+  font-size: 62.5%; /* 1 rem = 10px */
+  /* height: 100%; */
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg);
+  font-size: 1.6rem;
+  /* height: inherit; */
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; */
+}
+
+/****** UTILITIES ******/
+.hide {
+  display: none;
+}
+
+.container {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 45%;
+  left: 50%;
+  border-radius: 3px;
+  padding: .5rem;
+  background-color: var(--bgContainerCard);
+  /* z-index: 1; */
+}
+
+/****** DASHBOARD ******/
+.dashboard {
+  position: relative;
+  display: grid;
+  min-width: 100%;
+  gap: 8px;
+}
+
+/****** CONTENEDOR DE LAS CARDS ******/
+.container-card,
+.card,
+.face {
+  width: 70px;
+  height: 70px;
+}
+@media (min-width: 30em) {
+  .container-card,
+  .card,
+  .face {
+    width: 100px;
+    height:100px;
+  }
+}
+
+.card {
+  position: relative;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+}
+
+.container-card:hover .card {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  backface-visibility: hidden;
+  /* border: 4px solid #000000; */
+}
+
+.front {
+  background-color: var(--bg);
+  font-size: 8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #000000;
+}
+
+.back {
+  /* position: absolute; */
+  /* background-color: #FFF; */
+  transform: rotateY(180deg);
+  /* position: relative; */
+}
+
+.back img {
+  width: 70px;
+  height: 70px;
+}
+@media (min-width: 30em) {
+  .back img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/****** CONTENEDOR BOTÓN INICIAR JUEGO ******/
+.container-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-direction: column; */
+  width: 100%;
+  height: 100%;
+  /* background-color: var(--bg); */
+  
+}
+
+/****** BOTÓN INICIAR JUEGO ******/
+.start-btn {
+  width: 90%;
+  height: 10%;
+  border: none;
+  /* display: block; */
+  position: relative;
+  padding: 0.5em 2.4em;
+  font-size: 18px;
+  text-transform: uppercase;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  color: var(--startBtnColor);
+  z-index: 1;
+  font-weight: 700;
+  border-radius: 2px;
+}
+
+@media (min-width: 30em /* 480px */) {
+  .start-btn {
+    width: auto;
+    height: auto;
+  }
+}
+
+.start-btn span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: -1;
+  border: 3px solid var(--startBtnColor);
+}
+
+.start-btn span::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 8%;
+  height: 1400%;
+  background: var(--bg);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(60deg);
+  /* transition: all 0.3s; */
+  transition: background-color 0.3s, width 0.3s, transform 0.3s;
+}
+
+@media (min-width: 30em /* 480px */) {
+  .start-btn span::before {
+    height: 700%;
+  }
+}
+
+.start-btn:hover span::before {
+  transform: translate(-50%, -50%) rotate(90deg);
+  width: 100%;
+  background-color: var(--startBtnColor);
+}
+
+.start-btn:hover {
+  color: var(--bg);
+}
