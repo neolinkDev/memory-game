@@ -49,7 +49,7 @@ body {
   border-radius: 3px;
   padding: .5rem;
   background-color: var(--bgContainerCard);
-  /* z-index: 1; */
+  z-index: 1;
 }
 
 /****** DASHBOARD ******/
@@ -66,6 +66,7 @@ body {
 .face {
   width: 70px;
   height: 70px;
+  
 }
 @media (min-width: 30em) {
   .container-card,
@@ -73,6 +74,7 @@ body {
   .face {
     width: 100px;
     height:100px;
+    cursor: pointer;
   }
 }
 
@@ -80,11 +82,12 @@ body {
   position: relative;
   transition: 0.5s;
   transform-style: preserve-3d;
+  user-select: none;
 }
 
-.container-card:hover .card {
+/* .container-card:hover .card {
   transform: rotateY(180deg);
-}
+} */
 
 .face {
   position: absolute;

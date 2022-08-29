@@ -20,11 +20,16 @@ document.addEventListener('click', ({ target }) => {
     $containerBtn.classList.add('hide');
     $startBtn.classList.add('hide');
     
-
     generateDashboard();
 
-
-
   }
+
+  // if( target.matches( '.container-card' ) || target.matches(`${'.container-card'} *`) ){
+
+  //   console.log( 'Desde la clase container-card' );
+    
+  //   // selectCard();
+
+  // }
 
 })
