@@ -26,10 +26,11 @@ document.addEventListener('click', ({ target }) => {
 
   // if( target.matches( '.container-card' ) || target.matches(`${'.container-card'} *`) ){
 
-  //   console.log( 'Desde la clase container-card' );
+   
     
-  //   // selectCard();
 
   // }
 
 })
+
+
