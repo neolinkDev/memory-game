@@ -24,13 +24,6 @@ document.addEventListener('click', ({ target }) => {
 
   }
 
-  // if( target.matches( '.container-card' ) || target.matches(`${'.container-card'} *`) ){
-
-   
-    
-
-  // }
-
 })
 
 

@@ -1,9 +1,7 @@
 import { shuffleCards } from "./helpers";
 
 const d           = document;
-let cardIdList  = [];
-
-// let images;
+let cardIdList    = [];
 
 // regresa en un nuevo arreglo las imagenes del juego
 const uploadImages = () => {
@@ -40,7 +38,7 @@ const randomCards = ( size = 4 ) => {
   // un ciclo for para generar las 8 cartas pares de manera aleatoria
   for (let i = 0; i < size; i++) {
 
-    // crear un un indice aleatorio
+    // crear un indice aleatorio
     const randomIndex = Math.floor(Math.random() * imagesList.length);
 
     cardList.push(imagesList[ randomIndex ]);
@@ -57,18 +55,18 @@ const randomCards = ( size = 4 ) => {
 export function generateDashboard( size = 4 ){
 
   cardIdList  = [];
-
+  
   let randomCardList = randomCards();
+
+  const $dashboard = d.getElementById('dashboard');
   
   // creamos el arreglo con los pares de las cartas
   randomCardList = [...randomCardList, ...randomCardList ];
   
+  // barajamos las cards
   const shuffle = shuffleCards( randomCardList );
   // console.log(shuffle);
   
-
-  const $dashboard = d.getElementById('dashboard');
-
   const cardsList = [];
 
   for (let i = 0; i < size * size; i++) {
@@ -95,7 +93,7 @@ export function generateDashboard( size = 4 ){
   selectCard( $cards );
 }
 
-// selecciona la tarjeta que vamos a comparar
+// selecciona la tarjetas que vamos a comparar
 function selectCard( $cards ){
   
   $cards.forEach( ( $card ) => {
@@ -103,31 +101,18 @@ function selectCard( $cards ){
     $card.addEventListener('click', () => {
 
       // extraemos el primer elemento del `div` con la clase `container-card`
-      let card     = $card.firstElementChild;
-      // extraemos el ultimo elemento
-      let backCard = $card.firstElementChild.lastElementChild;
-      // console.log( backCard )
+      let card = $card.firstElementChild;
 
-      // extraemos el id de la $card y el id de la cara posterior de la $card
-      let cardId     = card.id;
-      let backCardId = backCard.id;
-
-      // console.log(backCardId)
-
-
-
-      // let index;
+      // extraemos el id de la $card y de la cara posterior de la $card
+      let cardId = card.id;
       
-      // cardId.length === 5
-      //   ? index = cardId.slice(-1)
-      //   : index = cardId.slice(-2);
-        
       // si la carta seleccionada no tiene el efecto se lo agregamos para que rote
       if (card.style.transform != "rotateY(180deg)") {
         card.style.transform = "rotateY(180deg)"
         cardIdList.push( cardId );
       }
       
+      // necesita tener un par de elementos en el arreglo para hacer la logica de la comparación del par de cartas
       if (cardIdList.length === 2) {
         deselectCard( cardIdList );
         cardIdList = [];
@@ -137,45 +122,30 @@ function selectCard( $cards ){
   })  
 }
 
-//
+// se encarga de la logica de comparacion de cada par de cartas a las que se le haga click
 function deselectCard( cardIdList ){
-
-  // let backCardId = 'back' + cardIdList[ 0 ].slice( 4 );
-  // console.log( backCardId )
 
   setTimeout(() => {
 
     // cara trasera de la card
-    const back1 = d.getElementById( 'back' + cardIdList[ 0 ].slice( 4 ) ).firstElementChild.src;
-    const back2 = d.getElementById( 'back' + cardIdList[ 1 ].slice( 4 ) ).firstElementChild.src;
-    // console.log(back1.id)
-    // console.log(back2.id)
+    const back1 = d.getElementById( 'back' + cardIdList[ 0 ].slice( 4 ) );
+    const back2 = d.getElementById( 'back' + cardIdList[ 1 ].slice( 4 ) );
 
-    // console.log(back1)
-    // console.log(back2)
-    back1 != back2 ? console.log('diferente') : console.log('iguales');
+    // comparamos si las cards son iguales
+    if(back1.firstElementChild.src != back2.firstElementChild.src){
 
+      // si no son iguales vuelven a mostrar la cara frontal de la card
+      const card1 = d.getElementById( cardIdList[0]);
+      const card2 = d.getElementById( cardIdList[1]);
+      card1.style.transform = "rotateY(0deg)";
+      card2.style.transform = "rotateY(0deg)";
 
+    }else{
 
-
-
-    // const backCard1 = d.getElementById(  );
-
-    // const card1 = d.getElementById( cardIdList[0]);
-    // const card2 = d.getElementById( cardIdList[1]);
-    // console.log(card1.id)
-    // console.log(card2.id)
-
-    // if (trasera1.innerHTML != trasera2.innerHTML) {
-    //   let tarjeta1 = document.getElementById("tarjeta" + selecciones[0])
-    //   let tarjeta2 = document.getElementById("tarjeta" + selecciones[1])
-    //   tarjeta1.style.transform = "rotateY(0deg)"
-    //   tarjeta2.style.transform = "rotateY(0deg)"
-    // }else{
-    //   trasera1.style.background = "plum"
-    //   trasera2.style.background = "plum"
-    // }
-
+      // al ser iguales el par de cartas le agregamos opacidad 
+      back1.style.opacity = 0.4;
+      back2.style.opacity = 0.4;
+    }
   }, 1000);
 
 }
