@@ -1,15 +1,12 @@
-# Memory Game🃏
+Memory Game🃏
 ---
-## Lenguajes y herramientas usados para construir el juego / Languages and tools used to build the memory game:
+Lenguajes y herramientas usados para construir el juego / Languages and tools used to build the memory game:
 
 - HTML
 - CSS
 - Vanilla JavaScript
 - Vite
-
 ---
-## Instalaciones necesarias / Necessary installations
-
 #### Instalar dependencias / Install dependencies
 
 ```javascript
@@ -23,4 +20,4 @@ npm run dev
 ```
 ---
 
-🔗[DEMO](https://youtube.com/jonmircha)
+🔗[DEMO](https://)
