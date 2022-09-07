@@ -1,8 +1,14 @@
-import { shuffleCards } from "./helpers";
+import { $container, $dashboard, chronometer, fnInterval, shuffleCards } from './helpers';
 
-const d           = document;
-let cardIdList    = [];
+// VARIABLES
+const d           = document,
+      $moves      = d.getElementById('moves');
 
+let cardIdList    = [],
+    movesCount    = 0,
+    over          = 0;
+
+/* FUNCIONES */
 // regresa en un nuevo arreglo las imagenes del juego
 const uploadImages = () => {
 
@@ -65,8 +71,7 @@ export function generateDashboard( size = 4 ){
   
   // barajamos las cards
   const shuffle = shuffleCards( randomCardList );
-  // console.log(shuffle);
-  
+ 
   const cardsList = [];
 
   for (let i = 0; i < size * size; i++) {
@@ -95,6 +100,8 @@ export function generateDashboard( size = 4 ){
 
 // selecciona la tarjetas que vamos a comparar
 function selectCard( $cards ){
+
+  movesCount = 0;
   
   $cards.forEach( ( $card ) => {
 
@@ -114,7 +121,14 @@ function selectCard( $cards ){
       
       // necesita tener un par de elementos en el arreglo para hacer la logica de la comparación del par de cartas
       if (cardIdList.length === 2) {
-        deselectCard( cardIdList );
+
+        // suma y muestra el número de movimientos
+        movesCount += 1;
+        $moves.innerHTML = `<span>Movimientos: </span>${ movesCount }`;
+
+        // console.log(movesCount)
+
+        deselectCard( cardIdList, $cards, movesCount );
         cardIdList = [];
       }
       
@@ -123,8 +137,8 @@ function selectCard( $cards ){
 }
 
 // se encarga de la logica de comparacion de cada par de cartas a las que se le haga click
-function deselectCard( cardIdList ){
-
+function deselectCard( cardIdList, $cards, movesCount ){
+  
   setTimeout(() => {
 
     // cara trasera de la card
@@ -141,13 +155,37 @@ function deselectCard( cardIdList ){
       card2.style.transform = "rotateY(0deg)";
 
     }else{
+      
+      over++;
 
       // al ser iguales el par de cartas le agregamos opacidad 
-      back1.style.opacity = 0.4;
-      back2.style.opacity = 0.4;
+      back1.style.filter = "grayscale(100%)"
+      back2.style.filter = "grayscale(100%)"
+
+      const $result = d.getElementById('result');
+      
+      // determina que completamos el juego
+      if( over === $cards.length / 2 ){
+
+        clearInterval( fnInterval );
+        
+        over = 0;
+
+        const { time, minutes } = chronometer();
+        
+        $result.innerHTML = `
+          <h2>¡Ganaste!</h2> 
+          <h4>${ movesCount } movimientos</h4>
+          <h4>Tiempo: ${ time } ${ minutes > 0 ? 'minutos' : 'segundos' } </h4>
+          <button id="back" class="back-play">Volver a jugar</button>`
+        ;
+
+        $container.classList.add('hide');
+        $dashboard.classList.add('hide');
+
+      }
     }
   }, 1000);
+  
 
 }
-
-
