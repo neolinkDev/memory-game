@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap");
 
 /*** CUSTOM PROPERTIES ***/
 :root {
@@ -5,8 +6,6 @@
   --startBtnColor: #fff;
   --bgContainerCard: #fff;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap");
 
 html {
   box-sizing: border-box;
