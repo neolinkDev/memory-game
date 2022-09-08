@@ -20,4 +20,4 @@ npm run dev
 ```
 ---
 
-🔗[DEMO](https://)
+🔗[DEMO](https://memorygame-jr.netlify.app/)
